@@ -5,7 +5,15 @@
  * the number twice.
  */
 export function bookEndList(numbers: number[]): number[] {
-    return numbers;
+    if (numbers.length === 0) {
+        return [];
+    }
+    if (numbers.length === 1) {
+        return [numbers[0], numbers[0]];
+    }
+    let length: number = numbers.length;
+    let newArray: number[] = [numbers[0], numbers[length - 1]];
+    return newArray;
 }
 
 /**
@@ -13,7 +21,9 @@ export function bookEndList(numbers: number[]): number[] {
  * number has been tripled (multiplied by 3).
  */
 export function tripleNumbers(numbers: number[]): number[] {
-    return numbers;
+    let triple: number[] = [...numbers];
+    triple = triple.map((trip: number): number => trip * 3);
+    return triple;
 }
 
 /**
@@ -21,7 +31,12 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    return [];
+    let newNum: string[] = [...numbers];
+    let converted: number[] = [];
+    converted = newNum.map((index: string): number =>
+        isNaN(parseInt(index)) ? 0 : parseInt(index),
+    );
+    return converted;
 }
 
 /**
@@ -32,7 +47,15 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
-    return [];
+    let newNum: string[] = [...amounts];
+    let convert1: string[] = [];
+    convert1 = newNum.map((index: string): string => index.replace("$", ""));
+    let tempArr: string[] = [...convert1];
+    let convert2: number[] = [];
+    convert2 = tempArr.map((index: string): number =>
+        isNaN(parseInt(index)) ? 0 : parseInt(index),
+    );
+    return convert2;
 };
 
 /**
@@ -41,7 +64,16 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    return [];
+    let msgClone: string[] = [...messages];
+
+    msgClone = msgClone.filter(
+        (index: string): boolean => !index.includes("?"),
+    );
+
+    msgClone = msgClone.map((index: string): string =>
+        index.includes("!") ? index.toUpperCase() : index,
+    );
+    return msgClone;
 };
 
 /**
@@ -49,7 +81,10 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
  * 4 letters long.
  */
 export function countShortWords(words: string[]): number {
-    return 0;
+    let wrdClone: string[] = [...words];
+    wrdClone = wrdClone.filter((index: string): boolean => index.length < 4);
+
+    return wrdClone.length;
 }
 
 /**
@@ -58,7 +93,13 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    return false;
+    let clrClone: string[] = [...colors];
+    let RGB: boolean = false;
+    RGB = clrClone.every(
+        (color: string): boolean =>
+            color === "red" || color === "blue" || color === "green",
+    );
+    return RGB;
 }
 
 /**
@@ -69,7 +110,20 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    return "";
+    let addClone: number[] = [...addends];
+    let sum: number = 0;
+    sum = addClone.reduce(
+        (currentTotal: number, num: number) => currentTotal + num,
+        0,
+    );
+    let finalstring: string = sum.toString() + "=";
+    if (addClone.length === 0) {
+        finalstring += "0";
+    } else {
+        finalstring += addClone.join("+");
+    }
+
+    return finalstring;
 }
 
 /**
@@ -82,5 +136,28 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    let valClone: number[] = [...values];
+    let sum: number = 0;
+    sum = valClone.reduce(
+        (currentTotal: number, num: number) => currentTotal + num,
+        0,
+    );
+    let ifneg = valClone.every((index: number): boolean => index > 0);
+    if (ifneg) {
+        valClone = [...valClone, sum];
+        return valClone;
+    }
+    let negIndex = valClone.findIndex((index: number): boolean => index < 0);
+
+    let valC2 = [...valClone];
+    valC2 = valC2.slice(0, negIndex);
+
+    let sum2: number = 0;
+    sum2 = valC2.reduce(
+        (currentTotal: number, num: number) => currentTotal + num,
+        0,
+    );
+
+    valClone.splice(negIndex + 1, 0, sum2);
+    return valClone;
 }
