@@ -1,7 +1,7 @@
 import { truncate } from "fs";
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
-import { makeBlankQuestion } from "./objects";
+import { duplicateQuestion, makeBlankQuestion } from "./objects";
 
 /**
  * Consumes an array of questions and returns a new array with only the questions
@@ -125,7 +125,14 @@ id,name,options,points,published
  * Check the unit tests for more examples!
  */
 export function toCSV(questions: Question[]): string {
-    return "";
+    let retArr: string;
+    retArr = questions
+        .map(
+            (question: Question): string =>
+                `${question.id},${question.name},${question.options.length},${question.points},${question.published}`,
+        )
+        .join("\n");
+    return "id,name,options,points,published" + "\n" + retArr;
 }
 
 /**
@@ -163,6 +170,9 @@ export function publishAll(questions: Question[]): Question[] {
  * are the same type. They can be any type, as long as they are all the SAME type.
  */
 export function sameType(questions: Question[]): boolean {
+    if (questions.length === 0) {
+        return true;
+    }
     let questType: string = questions[0].type;
     let same: boolean = false;
     same = questions.every(
@@ -245,13 +255,45 @@ export function changeQuestionTypeById(
  * Remember, if a function starts getting too complicated, think about how a helper function
  * can make it simpler! Break down complicated tasks into little pieces.
  */
+export function optionchange(
+    targetID: number,
+    options: string[],
+    targetOptionIndex: number,
+
+    newOption: string,
+): string[] {
+    let CloneOptions: string[] = [...options];
+    if (targetOptionIndex === -1) {
+        CloneOptions.push(newOption);
+    } else {
+        CloneOptions[targetOptionIndex] = newOption;
+    }
+    return CloneOptions;
+}
 export function editOption(
     questions: Question[],
     targetId: number,
     targetOptionIndex: number,
     newOption: string,
 ): Question[] {
-    return [];
+    let retArr: Question[] = [...questions];
+    retArr = retArr.map(
+        (question: Question): Question =>
+            question.id === targetId ?
+                {
+                    ...question,
+                    options: optionchange(
+                        targetId,
+                        question.options,
+                        targetOptionIndex,
+                        newOption,
+                    ),
+                }
+            :   { ...question },
+    );
+    console.log(questions[1]);
+
+    return retArr;
 }
 
 /***
@@ -265,5 +307,11 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number,
 ): Question[] {
-    return [];
+    let retArr: Question[] = [...questions];
+    let index: number = retArr.findIndex(
+        (question: Question) => question.id === targetId,
+    );
+    let clone: Question = duplicateQuestion(newId, retArr[index]);
+    retArr.splice(index + 1, 0, clone);
+    return retArr;
 }
