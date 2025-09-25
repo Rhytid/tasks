@@ -8,6 +8,7 @@ import { Question, QuestionType } from "./interfaces/question";
 export function makeBlankQuestion(
     id: number,
     name: string,
+<<<<<<< HEAD
     type: QuestionType,
 ): Question {
     return {
@@ -20,6 +21,11 @@ export function makeBlankQuestion(
         points: 1,
         published: false,
     };
+=======
+    type: QuestionType
+): Question {
+    return {};
+>>>>>>> upstream/task-state
 }
 
 /**
@@ -30,11 +36,14 @@ export function makeBlankQuestion(
  * HINT: Look up the `trim` and `toLowerCase` functions.
  */
 export function isCorrect(question: Question, answer: string): boolean {
+<<<<<<< HEAD
     if (
         answer.trim().toLowerCase() === question.expected.trim().toLowerCase()
     ) {
         return true;
     }
+=======
+>>>>>>> upstream/task-state
     return false;
 }
 
@@ -45,6 +54,7 @@ export function isCorrect(question: Question, answer: string): boolean {
  * be exactly one of the options.
  */
 export function isValid(question: Question, answer: string): boolean {
+<<<<<<< HEAD
     if (question.type === "multiple_choice_question") {
         if (question.options.includes(answer)) {
             return true;
@@ -53,6 +63,8 @@ export function isValid(question: Question, answer: string): boolean {
     if (question.type === "short_answer_question") {
         return true;
     }
+=======
+>>>>>>> upstream/task-state
     return false;
 }
 
@@ -63,9 +75,13 @@ export function isValid(question: Question, answer: string): boolean {
  * name "My First Question" would become "9: My First Q".
  */
 export function toShortForm(question: Question): string {
+<<<<<<< HEAD
     let part1: string = question.id.toString();
     let part2: string = question.name.substring(0, 10);
     return part1 + ": " + part2;
+=======
+    return "";
+>>>>>>> upstream/task-state
 }
 
 /**
@@ -86,6 +102,7 @@ export function toShortForm(question: Question): string {
  * Check the unit tests for more examples of what this looks like!
  */
 export function toMarkdown(question: Question): string {
+<<<<<<< HEAD
     let optionList = question.options.join("\n- ");
     if (question.type === "multiple_choice_question") {
         return (
@@ -94,6 +111,9 @@ export function toMarkdown(question: Question): string {
     } else {
         return "# " + question.name + "\n" + question.body;
     }
+=======
+    return "";
+>>>>>>> upstream/task-state
 }
 
 /**
