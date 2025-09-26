@@ -7,8 +7,6 @@ import { TwoDice } from "./components/TwoDice";
 import { CycleHoliday } from "./components/CycleHoliday";
 import { Counter } from "./components/Counter";
 
-import logo from "./Images/Current_Novel.jpg";
-
 function App(): React.JSX.Element {
     return (
         <div className="App">
@@ -18,6 +16,7 @@ function App(): React.JSX.Element {
             <hr></hr>
             <Counter></Counter>
             <hr />
+
             <RevealAnswer></RevealAnswer>
             <hr />
             <StartAttempt></StartAttempt>
