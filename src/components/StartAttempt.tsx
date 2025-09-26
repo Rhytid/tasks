@@ -17,35 +17,35 @@ export function StartAttempt(): React.JSX.Element {
     return (
         <div>
             <div>
-                <button
+                <Button
                     disabled={active || attempts <= 0}
                     onClick={() => {
                         StartQuiz();
                     }}
                 >
                     Start Quiz
-                </button>
+                </Button>
             </div>
             <div>
-                <button
+                <Button
                     disabled={active}
                     onClick={() => {
                         addAttempt();
                     }}
                 >
                     Mulligan
-                </button>
+                </Button>
             </div>
             <div>
                 <div>
-                    <button
+                    <Button
                         disabled={!active}
                         onClick={() => {
                             StopQuiz();
                         }}
                     >
                         Stop Quiz
-                    </button>
+                    </Button>
                 </div>
             </div>
             <div>
