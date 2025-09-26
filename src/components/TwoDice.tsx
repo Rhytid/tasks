@@ -28,20 +28,20 @@ export function TwoDice(): React.JSX.Element {
                 <span data-testid="right-die">{Die2}</span>
             </div>
             <div>
-                <button
+                <Button
                     onClick={() => {
                         newDie1();
                     }}
                 >
                     Roll Left
-                </button>
-                <button
+                </Button>
+                <Button
                     onClick={() => {
                         newDie2();
                     }}
                 >
                     Roll Right
-                </button>
+                </Button>
             </div>
             <div>{Die1 === Die2 && Die1 === 1 && <div>You Lose!</div>}</div>
             <div>{Die1 === Die2 && Die1 !== 1 && <div>You Win!</div>}</div>
