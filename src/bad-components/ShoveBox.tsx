@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
-function ShoveBoxButton({
-    position,
-    setPosition,
-}: {
-    position: number;
-    setPosition: (newPosition: number) => void;
-}) {
+{
+    /*function ShoveBoxButton({position,setPosition,}: {position: number;setPosition: (newPosition: number) => void;}) {
     return (
         <Button
             onClick={() => {
@@ -17,7 +12,7 @@ function ShoveBoxButton({
             Shove the Box
         </Button>
     );
-}
+    }
 
 function MoveableBox(): React.JSX.Element {
     const [position, setPosition] = useState<number>(10);
@@ -36,21 +31,41 @@ function MoveableBox(): React.JSX.Element {
         ></div>
     );
 }
-
+*/
+}
 export function ShoveBox(): React.JSX.Element {
-    const box = MoveableBox();
+    const [position, setPosition] = useState<number>(10);
 
+    const box = (
+        <div
+            data-testid="moveable-box"
+            style={{
+                width: "50px",
+                height: "50px",
+                backgroundColor: "lightblue",
+                border: "1px solid blue",
+                display: "inline-block",
+                verticalAlign: "bottom",
+                marginLeft: position + "px",
+            }}
+        ></div>
+    );
+    function changePosition() {
+        setPosition(4 + position);
+    }
     return (
         <div>
-            <h3>Shove Box</h3>
-            {/* <span>The box is at: {box.position}</span>
+            <span>The box is at: {position}</span>
             <div>
-                <ShoveBoxButton
-                    position={box.position}
-                    setPosition={box.setPosition}
-                ></ShoveBoxButton>
+                <Button
+                    onClick={() => {
+                        changePosition();
+                    }}
+                >
+                    Shove the Box
+                </Button>
                 {box}
-            </div> */}
+            </div>
         </div>
     );
 }
