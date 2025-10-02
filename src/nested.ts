@@ -291,7 +291,6 @@ export function editOption(
                 }
             :   { ...question },
     );
-    console.log(questions[1]);
 
     return retArr;
 }
